@@ -1,11 +1,5 @@
+import 'react-native-gesture-handler';
 /* eslint-disable prettier/prettier */
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -17,6 +11,10 @@ import {
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MealScreen from './screens/MealScreen';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,7 +26,10 @@ function App(): JSX.Element {
         backgroundColor={Colors.darker}
       />
       <NavigationContainer>
-        <CategoriesScreen />
+        <Stack.Navigator initialRouteName="Meals Categories">
+          <Stack.Screen name="Meals Categories" component={CategoriesScreen} />
+          <Stack.Screen name="Meals" component={MealScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
